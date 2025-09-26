@@ -1,13 +1,10 @@
-version: '3.8'
+version: "3.8"
 
 services:
- html:
-  container_name: alkaip_web
-  image: html
-  command:
-    "--provider.file.name = .//js"
-  
-
-
-  volumes:
-    - "var/run/docker /var/run/data_json"
+  web:
+    image: nginx:alpine
+    container_name: web_html
+    ports:
+      - "8080:80"
+    volumes:
+      - ./html:/usr/share/nginx/html:ro
