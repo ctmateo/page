@@ -1,5 +1,7 @@
-# Usar la imagen oficial de Nginx
 FROM nginx:alpine
 
-# Copiar tu archivo HTML al directorio por defecto de Nginx
-COPY ./html /usr/share/nginx/html
+# Limpio la carpeta por defecto
+RUN rm -rf /usr/share/nginx/html/*
+
+# Copio el index.html al directorio raíz de Nginx
+COPY ./index.html /usr/share/nginx/html/index.html
