@@ -1,7 +1,7 @@
 FROM nginx:alpine
 
-# Borrar cualquier archivo por defecto de Nginx
+# Limpio la carpeta por defecto
 RUN rm -rf /usr/share/nginx/html/*
 
-# Copiar tu index.html directamente
-COPY ./index.html /usr/share/nginx/html/
+# Copio el index.html al directorio raíz de Nginx
+COPY ./index.html /usr/share/nginx/html/index.html
