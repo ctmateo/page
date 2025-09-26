@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+ html:
+  container_name: alkaip_web
+  image: html
+  command:
+    "--provider.file.name = .//js"
+  
+
+
+  volumes:
+    - "var/run/docker /var/run/data_json"
