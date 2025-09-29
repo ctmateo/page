@@ -85,5 +85,24 @@ app.post("/translate", async (req, res) => {
 app.listen(PORT, () =>
   console.log(`Servidor corriendo en http://localhost:${PORT}`)
 );
-  
+----+--++++++++---
+async function translateText(text, lang) {
+  const res = await fetch("/translate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ text, lang }),
+  });
+  const data = await res.json();
+  return data.translations[0].text;
+}
+
+async function translatePage(lang) {
+  const elements = document.querySelectorAll("[translate-text]");
+  for (let element of elements) {
+    const text = element.innerText;
+    const translated = await translateText(text, lang);
+    element.innerText = translated;
+  }
+}
+
 
