@@ -1,3 +1,20 @@
+async function translateText(text, lang) {
+  const res = await fetch("https://api-free.deepl.com/v2/translate", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Authorization": "DeepL-Auth-Key TU_API_KEY_AQUI", // 👈 pon tu key aquí
+    },
+    body: new URLSearchParams({
+      text: text,
+      target_lang: lang.toUpperCase(), // ES, EN, FR, DE, etc.
+    }),
+  });
+
+  const data = await res.json();
+  console.log("DeepL response:", data);
+  return data.translations[0].text;
+}
 async function traductionDom(language) {
   const initial_doc = {};
   console.log("in traduccion");
