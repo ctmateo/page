@@ -2,7 +2,7 @@
 
 #navbar {
     top: 0;
-    right: calc(width*-50%);
+    right: calc(width);
     position: fixed;
     display: flex;
     align-items: center;
@@ -52,28 +52,51 @@
     padding: 100px;
 }
 
-.window.active {
-    position: absolute;
-    display: none;
-    border-radius: 0 0 12px 12px;
-    height: 3000px;
-    width: 3000px;
-    border: 1px solid black;
-}
 
-
-#drop-language {
-    top: 100%;
+.focus-area-hover {
+    top: 4%;
     left: 0;
-    position: relative;
-    cursor: pointer;
-    font-size: var.$FTSIZE-UPPERDOWN;
+    position: fixed;
+    height: 24px;
+    width: 100%;
+    background-color: red;
 
-    &:hover > .window.active{
+    &:hover .window {
         display: block;
+
     }
 }
 
 
+.window {
+    margin-top: 16.5px;
+    top: 100%;
+    right: 0;
+    position: absolute;
+    display: none;
+    border: 1px solid black;
 
+    p {
+        padding: 8px;
+        width: 82px;
+        cursor: pointer;
 
+        &:hover {
+            background-color: aqua;
+            display: block;
+        }
+    }
+}
+
+.dropdown {
+    position: relative;
+
+    &:hover .window {
+        display: block;
+    }
+}
+
+#drop-language {
+    cursor: pointer;
+    font-size: var.$FTSIZE-UPPERDOWN;
+}
