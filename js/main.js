@@ -37,4 +37,53 @@ async function traductionDom(language) {
 
   translateAllPage(language);
 }
-Access to fetch at 'https://api-free.deepl.com/v2/translate' from origin 'http://127.0.0.1:5500' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+Access to fetch at 'https7://api-free.deepl.com/v2/translate' from origin 'http://127.0.0.1:5500' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+
+
+
+---------++++
+  
+import express from "express";
+import fetch from "node-fetch";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const app = express();
+const PORT = 3000;
+
+// Necesario para servir archivos estáticos
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public"))); // sirve index.html
+
+// Ruta para traducir
+app.post("/translate", async (req, res) => {
+  const { text, lang } = req.body;
+
+  try {
+    const deeplRes = await fetch("https://api-free.deepl.com/v2/translate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "Authorization": "DeepL-Auth-Key TU_API_KEY_AQUI", // pon tu clave aquí
+      },
+      body: new URLSearchParams({
+        text: text,
+        target_lang: lang,
+      }),
+    });
+
+    const data = await deeplRes.json();
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: "Error en la traducción", details: err });
+  }
+});
+
+app.listen(PORT, () =>
+  console.log(`Servidor corriendo en http://localhost:${PORT}`)
+);
+  
+
