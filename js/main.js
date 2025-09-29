@@ -37,3 +37,4 @@ async function traductionDom(language) {
 
   translateAllPage(language);
 }
+Access to fetch at 'https://api-free.deepl.com/v2/translate' from origin 'http://127.0.0.1:5500' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: No 'Access-Control-Allow-Origin' header is present on the requested resource.
